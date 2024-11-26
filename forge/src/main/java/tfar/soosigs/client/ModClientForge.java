@@ -23,7 +23,7 @@ public class ModClientForge {
     }
 
     static void renderer(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer((EntityType<SoosigEntityForge>) ModEntities.SOOSIG, pContext -> new GeoEntityRenderer<>(pContext, new DefaultedEntityGeoModel<>(Soosigs.id("soosig"))));
+        event.registerEntityRenderer((EntityType<SoosigEntityForge>) ModEntities.SOOSIG, pContext -> new SoosigRenderer(pContext, new SoosigModel(Soosigs.id("soosig"))));
     }
 
 }
