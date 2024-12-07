@@ -2,7 +2,9 @@ package tfar.soosigs;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import tfar.soosigs.init.ModEntities;
+import tfar.soosigs.init.ModItems;
 import tfar.soosigs.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Items;
@@ -29,6 +31,7 @@ public class Soosigs {
         // your own abstraction layer. You can learn more about this in our provided services class. In this example
         // we have an interface in the common code and use a loader specific implementation to delegate our call to
         // the platform specific approach.
+        Services.PLATFORM.registerAll(ModItems.class,BuiltInRegistries.ITEM, Item.class);
         Services.PLATFORM.registerAll(ModEntities.class,BuiltInRegistries.ENTITY_TYPE, dirtyCast(EntityType.class));
     }
 

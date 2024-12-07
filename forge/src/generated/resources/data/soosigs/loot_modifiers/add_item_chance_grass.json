@@ -1,0 +1,29 @@
+{
+  "type": "soosigs:add_item_chance",
+  "chance": 0.05,
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:blocks/grass"
+    },
+    {
+      "condition": "minecraft:inverted",
+      "term": {
+        "condition": "minecraft:match_tool",
+        "predicate": {
+          "enchantments": [
+            {
+              "enchantment": "minecraft:silk_touch",
+              "levels": {
+                "min": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "item": "soosigs:soosig_egg",
+  "max": 1,
+  "min": 1
+}

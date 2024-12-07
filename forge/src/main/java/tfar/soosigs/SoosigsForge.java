@@ -10,9 +10,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.soosigs.client.ModClientForge;
+import tfar.soosigs.datagen.ModDatagen;
 import tfar.soosigs.init.ModEntities;
 
 import java.util.HashMap;
@@ -33,6 +35,7 @@ public class SoosigsForge {
         bus.addListener(this::registerObjs);
         bus.addListener(this::onInitialize);
         bus.addListener(this::attributes);
+        bus.addListener(ModDatagen::gather);
         if (FMLEnvironment.dist.isClient()) {
             ModClientForge.init(bus);
         }
@@ -48,6 +51,7 @@ public class SoosigsForge {
                 event.register((ResourceKey<? extends Registry<Object>>)registry.key(),pair.getLeft(),(Supplier<Object>)pair.getValue());
             }
         }
+        event.register(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Soosigs.id("add_item_chance"),() -> AddItemChanceLootModifier.CODEC);
     }
 
     public void onInitialize(FMLCommonSetupEvent e) {
