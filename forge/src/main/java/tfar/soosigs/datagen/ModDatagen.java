@@ -3,6 +3,7 @@ package tfar.soosigs.datagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 
@@ -20,7 +21,11 @@ public class ModDatagen {
         generator.addProvider(event.includeClient(),new ModBlockstateProvider(output,event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(),new ModLangProvider(output));
         generator.addProvider(event.includeClient(),new ModItemModelProvider(output,helper));
-        generator.addProvider(event.includeServer(),new ModRecipeProvider(output));
-        generator.addProvider(event.includeServer(),new ModGlobalLootModifierProvider(output));
+        if (event.includeServer()) {
+            generator.addProvider(true, new ModRecipeProvider(output));
+            generator.addProvider(true, new ModGlobalLootModifierProvider(output));
+            BlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(output,provider,helper);
+            generator.addProvider(true,blockTagsProvider);
+        }
     }
 }

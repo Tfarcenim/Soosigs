@@ -12,6 +12,6 @@ public class ModBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        //simpleBlock(Init.SUPERFLAT_PORTAL);
+//        simpleBlock(ModBlocks.GENE_INJECTOR);
     }
 }

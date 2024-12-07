@@ -3,6 +3,7 @@ package tfar.soosigs.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import tfar.soosigs.Soosigs;
+import tfar.soosigs.init.ModBlocks;
 import tfar.soosigs.init.ModEntities;
 import tfar.soosigs.init.ModItems;
 
@@ -15,5 +16,6 @@ public class ModLangProvider extends LanguageProvider {
     protected void addTranslations() {
         add(ModEntities.SOOSIG,"Soosig");
         add(ModItems.SOOSIG_EGG,"Soosig Egg");
+        add(ModBlocks.GENE_INJECTOR,"Gene Injector");
     }
 }

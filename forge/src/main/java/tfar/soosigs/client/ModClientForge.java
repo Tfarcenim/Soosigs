@@ -14,12 +14,12 @@ import tfar.soosigs.init.ModEntities;
 public class ModClientForge {
 
     public static void init(IEventBus bus) {
-        MinecraftForge.EVENT_BUS.addListener(ModClientForge::setup);
+        bus.addListener(ModClientForge::setup);
         bus.addListener(ModClientForge::renderer);
     }
 
     static void setup(FMLClientSetupEvent event) {
-
+        ModClient.setup();
     }
 
     static void renderer(EntityRenderersEvent.RegisterRenderers event) {
