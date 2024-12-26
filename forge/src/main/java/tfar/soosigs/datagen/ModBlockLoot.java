@@ -10,6 +10,7 @@ public class ModBlockLoot extends VanillaBlockLoot {
     @Override
     protected void generate() {
         dropSelf(ModBlocks.GENE_INJECTOR);
+        dropSelf(ModBlocks.SOOSIG_EGG);
     }
 
     @Override

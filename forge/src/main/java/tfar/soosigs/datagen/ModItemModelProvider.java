@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import tfar.soosigs.Soosigs;
 import tfar.soosigs.init.ModItems;
@@ -17,13 +18,15 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        makeOneLayerItem(ModItems.SOOSIG_EGG);
+        makeSimpleBlockItem(ModItems.SOOSIG_EGG);
     }
 
-    protected void makeSimpleBlockItem(Item item, ResourceLocation loc) {
+    final ModelFile.ExistingModelFile generated = getExistingFile(mcLoc("item/generated"));
+
+    protected void makeSimpleBlockItem(Item item, ResourceLocation model) {
         String s = BuiltInRegistries.ITEM.getKey(item).toString();
         getBuilder(s)
-                .parent(getExistingFile(loc));
+                .parent(getExistingFile(model));
     }
 
     protected void makeSimpleBlockItem(Item item) {
@@ -35,7 +38,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         String path = BuiltInRegistries.ITEM.getKey(item).getPath();
         if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
                 , PackType.CLIENT_RESOURCES, ".png", "textures")) {
-            getBuilder(path).parent(getExistingFile(mcLoc("item/generated")))
+            getBuilder(path).parent(generated)
                     .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
         } else {
             System.out.println("no texture for " + item + " found, skipping");

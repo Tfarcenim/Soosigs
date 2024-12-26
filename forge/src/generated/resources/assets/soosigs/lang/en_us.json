@@ -1,5 +1,5 @@
 {
   "block.soosigs.gene_injector": "Gene Injector",
-  "entity.soosigs.soosig": "Soosig",
-  "item.soosigs.soosig_egg": "Soosig Egg"
+  "block.soosigs.soosig_egg": "Soosig Egg",
+  "entity.soosigs.soosig": "Soosig"
 }

@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "soosigs:item/soosig_egg"
-  }
+  "parent": "soosigs:block/soosig_egg"
 }
