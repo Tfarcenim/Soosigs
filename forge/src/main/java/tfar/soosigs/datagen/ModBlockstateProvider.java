@@ -14,7 +14,7 @@ public class ModBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        ModelFile file = models().withExistingParent("soosig_egg",mcLoc("block/dragon_egg"))
+        ModelFile file = models().withExistingParent("soosig_egg",modLoc("block/tinted_dragon_egg"))
                 .texture("all",modLoc("block/soosig_egg"))
                 .texture("particle",modLoc("block/soosig_egg"));
         simpleBlock(ModBlocks.SOOSIG_EGG,file);

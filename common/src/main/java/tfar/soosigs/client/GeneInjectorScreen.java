@@ -1,6 +1,7 @@
 package tfar.soosigs.client;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,17 @@ public class GeneInjectorScreen extends AbstractContainerScreen<GeneInjectorMenu
         this.renderBackground($$0);
         super.render($$0, $$1, $$2, $$3);
         this.renderTooltip($$0, $$1, $$2);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        addRenderableWidget(Button.builder(Component.empty(),button -> sendButtonToServer(0))
+                .bounds(leftPos + 130,topPos+50,10,10).build());
+    }
+
+    private void sendButtonToServer(int action) {
+        this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, action);
     }
 
 

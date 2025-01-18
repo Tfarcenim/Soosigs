@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/dragon_egg",
+  "parent": "soosigs:block/tinted_dragon_egg",
   "textures": {
     "all": "soosigs:block/soosig_egg",
     "particle": "soosigs:block/soosig_egg"

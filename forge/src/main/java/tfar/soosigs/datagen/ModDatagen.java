@@ -6,6 +6,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
+import tfar.soosigs.datagen.data.ModBlockTagsProvider;
+import tfar.soosigs.datagen.data.ModItemTagProvider;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +28,7 @@ public class ModDatagen {
             generator.addProvider(true, new ModGlobalLootModifierProvider(output));
             BlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(output,provider,helper);
             generator.addProvider(true,blockTagsProvider);
+            generator.addProvider(true,new ModItemTagProvider(output,provider,blockTagsProvider.contentsGetter(),helper));
         }
     }
 }

@@ -3,16 +3,22 @@ package tfar.soosigs.blockentity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
+import tfar.soosigs.config.SoosigConfig;
+import tfar.soosigs.config.SoosigEntry;
 import tfar.soosigs.init.ModBlockEntityTypes;
 import tfar.soosigs.init.ModEntities;
 
@@ -28,6 +34,7 @@ public class SoosigEggBlockEntity extends BlockEntity {
     boolean validStructure;
 
     Set<BlockPos> missing = new HashSet<>();
+    public Item item = Items.AIR;
 
     public SoosigEggBlockEntity(BlockPos $$1, BlockState $$2) {
         this(ModBlockEntityTypes.SOOSIG_EGG, $$1, $$2);
@@ -156,15 +163,21 @@ public class SoosigEggBlockEntity extends BlockEntity {
         soosigEggBlockEntity.tick();
     }
 
+    public int getColor() {
+        return SoosigConfig.SERVER.COLORS.get().getOrDefault(item,new SoosigEntry(0xffffffff)).color();
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putInt("ticksExisted", ticksExisted);
+        tag.putString("item", BuiltInRegistries.ITEM.getKey(item).toString());
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         ticksExisted = tag.getInt("ticksExisted");
+        item = BuiltInRegistries.ITEM.get(new ResourceLocation(tag.getString("item")));
     }
 }

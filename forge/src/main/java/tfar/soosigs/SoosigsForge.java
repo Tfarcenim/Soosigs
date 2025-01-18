@@ -1,12 +1,15 @@
 package tfar.soosigs;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -14,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import tfar.soosigs.client.ModClientForge;
+import tfar.soosigs.config.SoosigConfig;
 import tfar.soosigs.datagen.ModDatagen;
 import tfar.soosigs.init.ModEntities;
 
@@ -59,6 +63,10 @@ public class SoosigsForge {
     }
     void attributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.SOOSIG, Mob.createMobAttributes().build());
+    }
+
+    void configLoad(ModConfigEvent e) {
+
     }
 
 }

@@ -1,4 +1,4 @@
-package tfar.soosigs.datagen;
+package tfar.soosigs.datagen.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
