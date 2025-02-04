@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -54,7 +55,14 @@ public class SoosigEggBlock extends Block implements EntityBlock {
         }
     }
 
-    @javax.annotation.Nullable
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity $$3, ItemStack $$4) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof SoosigEggBlockEntity soosigEggBlockEntity) {
+        }
+    }
+
+    @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return BaseEntityBlock.createTickerHelper(pBlockEntityType, ModBlockEntityTypes.SOOSIG_EGG, SoosigEggBlockEntity::tick);
     }

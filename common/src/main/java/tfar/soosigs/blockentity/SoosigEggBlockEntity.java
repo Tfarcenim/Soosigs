@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -164,7 +165,19 @@ public class SoosigEggBlockEntity extends BlockEntity {
     }
 
     public int getColor() {
-        return SoosigConfig.SERVER.COLORS.get().getOrDefault(item,new SoosigEntry(0xffffffff)).color();
+        return SoosigConfig.CLIENT.COLORS.get().getOrDefault(item,new SoosigEntry(0xffffffff)).color();
+    }
+
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    /**
+     * Get an NBT compound to sync to the client with SPacketChunkData, used for initial loading of the chunk or when
+     * many blocks change at once. This compound comes back to you clientside in {@link handleUpdateTag}
+     */
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
     }
 
     @Override
@@ -179,5 +192,7 @@ public class SoosigEggBlockEntity extends BlockEntity {
         super.load(tag);
         ticksExisted = tag.getInt("ticksExisted");
         item = BuiltInRegistries.ITEM.get(new ResourceLocation(tag.getString("item")));
+        if (hasLevel())
+            level.sendBlockUpdated(worldPosition,getBlockState(),getBlockState(),3);
     }
 }

@@ -12,6 +12,7 @@ public class SoosigRenderer extends GeoEntityRenderer<SoosigEntityForge> {
 
     public SoosigRenderer(EntityRendererProvider.Context renderManager, GeoModel<SoosigEntityForge> model) {
         super(renderManager, model);
+        addRenderLayer(new SoosigFurLayer(this));
     }
 
 }

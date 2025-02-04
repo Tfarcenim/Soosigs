@@ -4,25 +4,18 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Shearable;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
+import tfar.soosigs.config.SoosigConfig;
+import tfar.soosigs.config.SoosigEntry;
 
 public class SoosigEntity extends PathfinderMob implements Shearable {
 
-    private static final EntityDataAccessor<Integer> DATA_COLOR = SynchedEntityData.defineId(SoosigEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<ItemStack> DATA_ITEMSTACK = SynchedEntityData.defineId(SoosigEntity.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> DATA_SHEARED = SynchedEntityData.defineId(SoosigEntity.class, EntityDataSerializers.BOOLEAN);
 
     protected SoosigEntity(EntityType<? extends PathfinderMob> $$0, Level $$1) {
@@ -32,7 +25,7 @@ public class SoosigEntity extends PathfinderMob implements Shearable {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        entityData.define(DATA_COLOR,0xffffff);
+        entityData.define(DATA_ITEMSTACK,ItemStack.EMPTY);
         entityData.define(DATA_SHEARED,false);
     }
 
@@ -46,12 +39,8 @@ public class SoosigEntity extends PathfinderMob implements Shearable {
         return entityData.get(DATA_SHEARED);
     }
 
-    public void setColor(int color) {
-        entityData.set(DATA_COLOR,color);
-    }
-
     public int getColor() {
-        return entityData.get(DATA_COLOR);
+        return SoosigConfig.CLIENT.COLORS.get().getOrDefault(entityData.get(DATA_ITEMSTACK).getItem(),new SoosigEntry(0xffffffff)).color();
     }
 
     @Override
