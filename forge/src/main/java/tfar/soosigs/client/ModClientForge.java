@@ -11,16 +11,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import tfar.soosigs.SoosigEntityForge;
 import tfar.soosigs.Soosigs;
 import tfar.soosigs.blockentity.SoosigEggBlockEntity;
 import tfar.soosigs.config.SoosigConfig;
-import tfar.soosigs.config.SoosigEntry;
+import tfar.soosigs.config.ClientEntry;
 import tfar.soosigs.init.ModBlocks;
 import tfar.soosigs.init.ModEntities;
 import tfar.soosigs.init.ModItems;
@@ -48,7 +45,7 @@ public class ModClientForge {
         CompoundTag tag = stack.getTagElement(BlockItem.BLOCK_ENTITY_TAG);
         if (tag != null) {
             Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(tag.getString("item")));
-            return SoosigConfig.CLIENT.COLORS.get().getOrDefault(item,new SoosigEntry(0xffffffff)).color();
+            return SoosigConfig.CLIENT.COLORS.get().getOrDefault(item,ClientEntry.BLANK).color();
         }
         return 0xffffffff;
     };

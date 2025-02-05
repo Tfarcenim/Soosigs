@@ -19,6 +19,7 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 
 public class SoosigEntityForge extends SoosigEntity implements GeoEntity, IForgeShearable {
@@ -44,10 +45,10 @@ public class SoosigEntityForge extends SoosigEntity implements GeoEntity, IForge
             int i = 1 + this.random.nextInt(3);
 
             java.util.List<ItemStack> items = new java.util.ArrayList<>();
-
+            items.add(getItem().copy());
             return items;
         }
-        return java.util.Collections.emptyList();
+        return Collections.emptyList();
     }
 
     @Override

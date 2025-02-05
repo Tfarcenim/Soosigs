@@ -1,6 +1,5 @@
 package tfar.soosigs.config;
 
-import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
@@ -9,11 +8,11 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SoosigConfig {
-    public static final Codec<Map<Item,SoosigEntry>> MAP_CODEC = Codec.unboundedMap(BuiltInRegistries.ITEM.byNameCodec(),SoosigEntry.CODEC);
+    public static final Map<Item, ClientEntry> DEFAULTS = defaults();
+    public static final Codec<Map<Item, ClientEntry>> MAP_CODEC = Codec.unboundedMap(BuiltInRegistries.ITEM.byNameCodec(), ClientEntry.CODEC);
 
     public static final Server SERVER;
     public static final ForgeConfigSpec SERVER_SPEC;
@@ -33,8 +32,6 @@ public class SoosigConfig {
         CLIENT_SPEC = specPair2.getRight();
         CLIENT = specPair2.getLeft();
     }
-    public static final List<String> defaults = Lists.newArrayList(
-            "minecraft:emerald|100");
 
     public static class Server {
 
@@ -46,21 +43,27 @@ public class SoosigConfig {
     }
 
     public static class Client {
-        public final ConfigHelper.ConfigObject<Map<Item,SoosigEntry>> COLORS;
+        public final ConfigHelper.ConfigObject<Map<Item, ClientEntry>> COLORS;
 
 
         public Client(ForgeConfigSpec.Builder builder) {
             builder.push("general");
-            COLORS = ConfigHelper.defineObject(builder,"entries",MAP_CODEC,defaults());
+            COLORS = ConfigHelper.defineObject(builder,"entries",MAP_CODEC,DEFAULTS);
             builder.pop();
         }
     }
 
-    public static final Map<Item,SoosigEntry> DEFAULTS = defaults();
 
-    public static Map<Item,SoosigEntry> defaults() {
-        Map<Item,SoosigEntry> map = new HashMap<>();
-        map.put(Items.REDSTONE,new SoosigEntry(0xffff0000));
+    public static Map<Item, ClientEntry> defaults() {
+        Map<Item, ClientEntry> map = new HashMap<>();
+
+        map.put(Items.DIAMOND,new ClientEntry(0x00ffff));
+        map.put(Items.EMERALD,new ClientEntry(0x00ff00));
+        map.put(Items.IRON_INGOT,new ClientEntry(0xeeeeee));
+        map.put(Items.GOLD_INGOT,new ClientEntry(0xffdd00));
+        map.put(Items.LAPIS_LAZULI,new ClientEntry(0x0000ff));
+        map.put(Items.NETHERITE_SCRAP,new ClientEntry(0x401E00));
+        map.put(Items.REDSTONE,new ClientEntry(0xff0000));
         return map;
     }
 

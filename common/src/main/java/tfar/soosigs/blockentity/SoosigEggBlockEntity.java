@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,8 +19,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
+import tfar.soosigs.SoosigEntity;
 import tfar.soosigs.config.SoosigConfig;
-import tfar.soosigs.config.SoosigEntry;
+import tfar.soosigs.config.ClientEntry;
 import tfar.soosigs.init.ModBlockEntityTypes;
 import tfar.soosigs.init.ModEntities;
 
@@ -59,7 +61,10 @@ public class SoosigEggBlockEntity extends BlockEntity {
                 }
                 setChanged();
                 if (ticksExisted > HATCH_TIME) {
-                    ModEntities.SOOSIG.spawn((ServerLevel) level, worldPosition, MobSpawnType.EVENT);
+                    SoosigEntity soosig = ModEntities.SOOSIG.spawn((ServerLevel) level, worldPosition, MobSpawnType.EVENT);
+                    if (soosig!=null) {
+                        soosig.setItem(item.getDefaultInstance());
+                    }
                     level.removeBlock(worldPosition, false);
                 }
             } else {
@@ -165,7 +170,7 @@ public class SoosigEggBlockEntity extends BlockEntity {
     }
 
     public int getColor() {
-        return SoosigConfig.CLIENT.COLORS.get().getOrDefault(item,new SoosigEntry(0xffffffff)).color();
+        return SoosigConfig.CLIENT.COLORS.get().getOrDefault(item,new ClientEntry(0xffffffff)).color();
     }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket() {

@@ -21,6 +21,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(ModTags.Items.ALLOWED_RESOURCES).add(Items.DIAMOND,Items.GOLD_INGOT,Items.IRON_INGOT, Items.REDSTONE);
+        tag(ModTags.Items.ALLOWED_RESOURCES).add(
+                Items.DIAMOND,Items.EMERALD,
+                Items.GOLD_INGOT,Items.IRON_INGOT,
+                Items.LAPIS_LAZULI,
+                Items.NETHERITE_SCRAP, Items.REDSTONE);
     }
 }
