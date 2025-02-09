@@ -1,6 +1,7 @@
 package tfar.soosigs.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -18,5 +19,6 @@ public class ModBlockstateProvider extends BlockStateProvider {
                 .texture("all",modLoc("block/soosig_egg"))
                 .texture("particle",modLoc("block/soosig_egg"));
         simpleBlock(ModBlocks.SOOSIG_EGG,file);
+        simpleBlock(ModBlocks.GENE_INJECTOR, models().getExistingFile(new ResourceLocation("block/furnace")));
     }
 }

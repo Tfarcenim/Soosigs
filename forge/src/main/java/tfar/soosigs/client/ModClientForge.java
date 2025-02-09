@@ -44,8 +44,9 @@ public class ModClientForge {
     static ItemColor item_color = (stack, pTintIndex) -> {
         CompoundTag tag = stack.getTagElement(BlockItem.BLOCK_ENTITY_TAG);
         if (tag != null) {
-            Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(tag.getString("item")));
-            return SoosigConfig.CLIENT.COLORS.get().getOrDefault(item,ClientEntry.BLANK).color();
+            ResourceLocation resourceLocation = new ResourceLocation(tag.getString("item"));
+            int color1 = SoosigConfig.CLIENT.COLORS.get().getOrDefault(resourceLocation, ClientEntry.BLANK).color();
+            return color1;
         }
         return 0xffffffff;
     };

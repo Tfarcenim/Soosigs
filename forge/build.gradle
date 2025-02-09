@@ -80,6 +80,7 @@ dependencies {
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-$minecraft_version:$geckolib")
+    implementation fg.deobf("curse.maven:ato-405593:5348605")
 }
 
 tasks.withType(JavaCompile).configureEach {

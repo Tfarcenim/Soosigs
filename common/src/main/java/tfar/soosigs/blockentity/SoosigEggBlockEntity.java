@@ -170,7 +170,7 @@ public class SoosigEggBlockEntity extends BlockEntity {
     }
 
     public int getColor() {
-        return SoosigConfig.CLIENT.COLORS.get().getOrDefault(item,new ClientEntry(0xffffffff)).color();
+        return SoosigConfig.CLIENT.COLORS.get().getOrDefault(BuiltInRegistries.ITEM.getKey(item),new ClientEntry(0xffffffff)).color();
     }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket() {

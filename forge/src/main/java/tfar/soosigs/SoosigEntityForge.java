@@ -42,6 +42,7 @@ public class SoosigEntityForge extends SoosigEntity implements GeoEntity, IForge
         this.gameEvent(GameEvent.SHEAR, player);
         if (!world.isClientSide) {
             this.setSheared(true);
+            countdown = SHEAR_TIME;
             int i = 1 + this.random.nextInt(3);
 
             java.util.List<ItemStack> items = new java.util.ArrayList<>();

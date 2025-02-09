@@ -1,5 +1,6 @@
 package tfar.soosigs;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -18,6 +19,9 @@ public class SoosigEntity extends PathfinderMob {
     private static final EntityDataAccessor<ItemStack> DATA_ITEMSTACK = SynchedEntityData.defineId(SoosigEntity.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> DATA_SHEARED = SynchedEntityData.defineId(SoosigEntity.class, EntityDataSerializers.BOOLEAN);
 
+    public static int SHEAR_TIME = 1200;
+    int countdown;
+
     protected SoosigEntity(EntityType<? extends PathfinderMob> $$0, Level $$1) {
         super($$0, $$1);
     }
@@ -27,6 +31,17 @@ public class SoosigEntity extends PathfinderMob {
         super.defineSynchedData();
         entityData.define(DATA_ITEMSTACK,ItemStack.EMPTY);
         entityData.define(DATA_SHEARED,false);
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        super.customServerAiStep();
+        if (isSheared()) {
+            countdown--;
+            if (countdown <= 0) {
+                setSheared(false);
+            }
+        }
     }
 
     public ItemStack getItem() {
@@ -47,7 +62,7 @@ public class SoosigEntity extends PathfinderMob {
     }
 
     public int getColor() {
-        return SoosigConfig.CLIENT.COLORS.get().getOrDefault(getItem().getItem(),ClientEntry.BLANK).color();
+        return SoosigConfig.CLIENT.COLORS.get().getOrDefault(BuiltInRegistries.ITEM.getKey(getItem().getItem()),ClientEntry.BLANK).color();
     }
 
 

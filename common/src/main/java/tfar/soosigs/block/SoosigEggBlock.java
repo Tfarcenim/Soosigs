@@ -22,8 +22,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import tfar.soosigs.blockentity.GeneContainer;
 import tfar.soosigs.blockentity.SoosigEggBlockEntity;
 import tfar.soosigs.init.ModBlockEntityTypes;
+import tfar.soosigs.init.ModItems;
 
 import java.util.List;
 
@@ -67,5 +69,10 @@ public class SoosigEggBlock extends Block implements EntityBlock {
         return BaseEntityBlock.createTickerHelper(pBlockEntityType, ModBlockEntityTypes.SOOSIG_EGG, SoosigEggBlockEntity::tick);
     }
 
-
+    public static ItemStack craft(Item item) {
+        ItemStack input1 = ModItems.SOOSIG_EGG.getDefaultInstance();
+        ItemStack input2 = item.getDefaultInstance();
+            input1.getOrCreateTagElement(BlockItem.BLOCK_ENTITY_TAG).putString("item", BuiltInRegistries.ITEM.getKey(input2.getItem()).toString());
+            return input1;
+    }
 }

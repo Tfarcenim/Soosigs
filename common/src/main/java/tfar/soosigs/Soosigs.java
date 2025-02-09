@@ -4,6 +4,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -41,6 +42,8 @@ public class Soosigs {
         Services.PLATFORM.registerAll(ModBlockEntityTypes.class,BuiltInRegistries.BLOCK_ENTITY_TYPE, dirtyCast(BlockEntityType.class));
         Services.PLATFORM.registerAll(ModEntities.class,BuiltInRegistries.ENTITY_TYPE, dirtyCast(EntityType.class));
         Services.PLATFORM.registerAll(ModMenuTypes.class,BuiltInRegistries.MENU, dirtyCast(MenuType.class));
+        Services.PLATFORM.registerAll(ModCreativeTabs.class,BuiltInRegistries.CREATIVE_MODE_TAB, CreativeModeTab.class);
+
     }
 
      @SuppressWarnings("unchecked")
